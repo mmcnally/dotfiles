@@ -100,6 +100,11 @@
 (when (fboundp 'winner-mode)
   (winner-mode 1))
 
+;; indent buffer when not in python mode
+(defun indent-buffer-when-not-python ()
+  (when (not (derived-mode-p 'python-mode))
+    (indent-buffer)))
+
 ;; indent buffer on save
 (defun indent-buffer ()
   (interactive)
@@ -107,7 +112,7 @@
     (indent-region (point-min) (point-max) nil)))
 
 ;; formatting hooks on save
-(add-hook 'before-save-hook #'indent-buffer)
+(add-hook 'before-save-hook #'indent-buffer-when-not-python)
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
 
 ;; windmove
@@ -149,9 +154,6 @@
 ;; uses y or n instead of yes or no
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; workaround to stop emacs indenting on save in python
-(add-hook 'python-mode-hook
-	  (lambda() (remove-hook 'before-save-hook #'indent-buffer)))
 
 ;; java indenting
 (setq c-basic-offset 2)
