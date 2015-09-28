@@ -17,11 +17,7 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='emacs'
-else
-    export EDITOR='emacs'
-fi
+export EDITOR='emacs'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -31,15 +27,14 @@ fi
 
 
 # for full list of aliases, run 'alias'
-alias zshconfig="emacs ~/.zshrc && source ~/.zshrc"
-alias zshrc="zshconfig"
+alias zshconf="emacs ~/.zshrc && source ~/.zshrc"
 alias drp="cd ~/Dropbox"
 alias startserver="sudo python -m SimpleHTTPServer 80"
 alias edlab='ssh -X -l mgmcnally elnux.cs.umass.edu'
 alias l='clear && ls'
+alias dotfiles='cd ~/Dropbox/dotfiles'
 
 # emacs
-alias emacs='e'
 alias e='emacsclient -t -a ""'
 alias killemacs='emacsclient --eval "(progn (save-some-buffers t t) (kill-emacs))"'
 
@@ -63,3 +58,16 @@ alias ga="git add .";
 alias gp="git push";
 alias gc="git commit -m";
 alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+
+dots() {
+    # copy current versions into dotfiles directory
+    echo "copying..."
+    echo ""
+    cp ~/.zshrc ~/Dropbox/dotfiles/zshrc
+    cp ~/.tmux.conf ~/Dropbox/dotfiles/tmux.conf
+    cp ~/.emacs.d/init.el ~/Dropbox/dotfiles/init.el
+
+    cd ~/Dropbox/dotfiles
+    git status
+}
