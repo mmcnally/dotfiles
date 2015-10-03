@@ -4,27 +4,11 @@ export ZSH=/Users/Matt/.oh-my-zsh
 # Set name of the theme to load.
 ZSH_THEME="robbyrussell"
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
 plugins=(chucknorris brew)
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/Matt/Documents/scala-2.11.2/bin:/usr/texbin"
-
-source $ZSH/oh-my-zsh.sh
-
-# You may need to manually set your language environment
-export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-export EDITOR='emacs'
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
+################################################
+## ALIASES
+################################################
 
 # for full list of aliases, run 'alias'
 alias zshconf="emacs ~/.zshrc && source ~/.zshrc"
@@ -47,6 +31,7 @@ alias gamedev="cd ~/Dropbox/397"
 alias 150="cd ~/Dropbox/150"
 
 # tmux
+alias tm="tmux attach || tmux new"
 alias tconf="emacs ~/.tmux.conf"
 alias tka="killall tmux"
 alias tls="tmux ls"
@@ -73,3 +58,20 @@ dots() {
     git status
     cd -
 }
+
+
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/Matt/Documents/scala-2.11.2/bin:/usr/texbin"
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+source $ZSH/oh-my-zsh.sh
+
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+export EDITOR='emacs'
