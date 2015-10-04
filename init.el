@@ -6,7 +6,7 @@
 (setq package-enable-at-startup nil)
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/"))
+	     '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
 
 
@@ -52,43 +52,27 @@
   )
 
 (use-package scala-mode2
-  :defer 10
+  :mode ("\\.scala\\'" . scala-mode)
   :ensure t
-  )
-
-;; lists recently opened files
-(use-package recentf
-  :defer 10
-  :ensure t
-  :disabled t
-  :config
-  (recentf-mode 1)
-  (setq recentf-max-menu-items 25)
-  (global-set-key (kbd "C-x C-r") 'recentf-open-files)
-  )
-
-;; frame rearranging
-(use-package transpose-frame
-  :defer 15
-  :ensure t
-  )
-
-;; ace jump mode
-;; C-c SPC -> ace-jump-word-mode
-;; C-u C-c SPC -> ace-jump-char-mode
-;; C-u C-u C-c SPC -> ace-jump-line-mode
-(use-package ace-jump-mode
-  :defer 1
-  :ensure t
-  :disabled t
-  :config
-  (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
   )
 
 (use-package elm-mode
-  :defer 1
+  :mode ("\\.elm\\'" . elm-mode)
   :ensure t
-  :config
+  )
+
+(use-package auctex
+  :mode ("\\.tex\\'" . LaTeX-mode)
+  :init
+  (setq TeX-command-list
+	'(
+	  ("LaTeX" "%`%l%(mode)%' %t" TeX-run-TeX nil (latex-mode doctex-mode)
+	   :help "Run LaTeX")
+	  ("View" "open -a Preview.app %s.pdf" TeX-run-command t t
+	   :help "Run Text viewer")
+	  )
+	)
+  :ensure t
   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;

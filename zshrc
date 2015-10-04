@@ -60,7 +60,7 @@ dots() {
 }
 
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/Matt/Documents/scala-2.11.2/bin:/usr/texbin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/Matt/Documents/scala-2.11.2/bin:/usr/texbin:/Library/Tex/texbin"
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
