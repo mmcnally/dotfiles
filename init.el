@@ -160,6 +160,8 @@
 
 ;; workaround to bind uncomment or comment function to C-j in latex-mode
 (add-hook 'latex-mode-hook '(lambda () (local-set-key (kbd "C-j") 'comment-or-uncomment-region-or-line)))
+(add-hook 'LaTeX-mode-hook '(lambda () (local-set-key (kbd "C-j") 'comment-or-uncomment-region-or-line)))
+
 
 
 ;; set transparency
