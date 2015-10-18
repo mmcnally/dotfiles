@@ -47,16 +47,16 @@ alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%
 
 
 dots() {
-    # copy current versions into dotfiles directory
-    echo "copying..."
-    echo ""
-    cp ~/.zshrc ~/Dropbox/dotfiles/zshrc
-    cp ~/.tmux.conf ~/Dropbox/dotfiles/tmux.conf
-    cp ~/.emacs.d/init.el ~/Dropbox/dotfiles/init.el
+# copy current versions into dotfiles directory
+echo "copying..."
+echo ""
+cp ~/.zshrc ~/Dropbox/dotfiles/zshrc
+cp ~/.tmux.conf ~/Dropbox/dotfiles/tmux.conf
+cp ~/.emacs.d/init.el ~/Dropbox/dotfiles/init.el
 
-    cd ~/Dropbox/dotfiles
-    git status
-    cd -
+cd ~/Dropbox/dotfiles
+git status
+cd -
 }
 
 
