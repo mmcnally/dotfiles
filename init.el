@@ -25,6 +25,7 @@
 
 (use-package smartparens
   :defer 2
+  :disabled t
   :ensure t
   :config
   (smartparens-global-mode t)
@@ -32,6 +33,7 @@
 
 (use-package magit
   :defer 5
+  :disabled t
   :ensure t
   :config
   (global-set-key (kbd "C-x g") 'magit-status)
@@ -46,6 +48,7 @@
 
 (use-package flycheck
   :defer 4
+  :disabled t
   :ensure t
   :config
   (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -79,11 +82,6 @@
 ;;; Other Configuration ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; winner mode
-;; can undo and redo window config with C-c left and C-c right
-(when (fboundp 'winner-mode)
-  (winner-mode 1))
-
 ;; indent buffer when not in python mode
 (defun indent-buffer-when-not-python ()
   (when (not (derived-mode-p 'python-mode))
@@ -98,10 +96,6 @@
 ;; formatting hooks on save
 (add-hook 'before-save-hook #'indent-buffer-when-not-python)
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
-
-;; windmove
-;; shift + direction moves between windows
-(windmove-default-keybindings)
 
 ;; return indents automatically
 (define-key global-map (kbd "RET") 'newline-and-indent)
@@ -138,7 +132,6 @@
 ;; uses y or n instead of yes or no
 (fset 'yes-or-no-p 'y-or-n-p)
 
-
 ;; java indenting
 (setq c-basic-offset 2)
 
@@ -161,7 +154,6 @@
 ;; workaround to bind uncomment or comment function to C-j in latex-mode
 (add-hook 'latex-mode-hook '(lambda () (local-set-key (kbd "C-j") 'comment-or-uncomment-region-or-line)))
 (add-hook 'LaTeX-mode-hook '(lambda () (local-set-key (kbd "C-j") 'comment-or-uncomment-region-or-line)))
-
 
 
 ;; set transparency
