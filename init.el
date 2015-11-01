@@ -31,27 +31,11 @@
   (smartparens-global-mode t)
   )
 
-(use-package magit
-  :defer 5
-  :disabled t
-  :ensure t
-  :config
-  (global-set-key (kbd "C-x g") 'magit-status)
-  )
-
 (use-package auto-complete
   :defer 2
   :ensure t
   :config
   (ac-config-default)
-  )
-
-(use-package flycheck
-  :defer 4
-  :disabled t
-  :ensure t
-  :config
-  (add-hook 'after-init-hook #'global-flycheck-mode)
   )
 
 (use-package scala-mode2
@@ -154,7 +138,6 @@
 ;; workaround to bind uncomment or comment function to C-j in latex-mode
 (add-hook 'latex-mode-hook '(lambda () (local-set-key (kbd "C-j") 'comment-or-uncomment-region-or-line)))
 (add-hook 'LaTeX-mode-hook '(lambda () (local-set-key (kbd "C-j") 'comment-or-uncomment-region-or-line)))
-
 
 ;; set transparency
 (set-frame-parameter (selected-frame) 'alpha '(75 75))
