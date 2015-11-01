@@ -40,23 +40,24 @@ alias td="tmux detach"
 
 # git
 alias gs="git status";
-alias ga="git add .";
+alias ga="git add";
 alias gp="git push";
 alias gc="git commit -m";
 alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gdeleteall="git stash save --keep-index --include-untracked && git stash drop"
 
 
 dots() {
-# copy current versions into dotfiles directory
-echo "copying..."
-echo ""
-cp ~/.zshrc ~/Dropbox/dotfiles/zshrc
-cp ~/.tmux.conf ~/Dropbox/dotfiles/tmux.conf
-cp ~/.emacs.d/init.el ~/Dropbox/dotfiles/init.el
+    # copy current versions into dotfiles directory
+    echo "copying..."
+    echo ""
+    cp ~/.zshrc ~/Dropbox/dotfiles/zshrc
+    cp ~/.tmux.conf ~/Dropbox/dotfiles/tmux.conf
+    cp ~/.emacs.d/init.el ~/Dropbox/dotfiles/init.el
 
-cd ~/Dropbox/dotfiles
-git status
-cd -
+    cd ~/Dropbox/dotfiles
+    git status
+    cd -
 }
 
 
