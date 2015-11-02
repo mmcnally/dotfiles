@@ -11,6 +11,8 @@ plugins=(chucknorris brew)
 ################################################
 
 # for full list of aliases, run 'alias'
+
+# general
 alias zshconf="emacs ~/.zshrc && source ~/.zshrc"
 alias drp="cd ~/Dropbox"
 alias startserver="sudo python -m SimpleHTTPServer 80"
@@ -39,10 +41,11 @@ alias ta="tmux attach"
 alias td="tmux detach"
 
 # git
-alias gs="git status";
-alias ga="git add";
-alias gp="git push";
-alias gc="git commit -m";
+alias gs="git status"
+alias ga="git add"
+alias gaa="git add --all"
+alias gp="git push"
+alias gc="git commit -m"
 alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gdeleteall="git stash save --keep-index --include-untracked && git stash drop"
 
