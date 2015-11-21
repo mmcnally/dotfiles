@@ -9,6 +9,8 @@
 	     '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
 
+(when (not package-archive-contents)
+  (package-refresh-contents))
 
 ;; Bootstrap use-package
 (unless (package-installed-p 'use-package)
@@ -37,6 +39,12 @@
   :config
   (ac-config-default)
   )
+
+
+(use-package jedi
+  :ensure t
+  )
+
 
 (use-package scala-mode2
   :mode ("\\.scala\\'" . scala-mode)
@@ -121,6 +129,10 @@
 
 ;; javascript indenting
 (setq js-indent-level 2)
+
+;; python autocomplete - jedi
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
 
 ;; uncomment or comment line/region
 (defun comment-or-uncomment-region-or-line ()
