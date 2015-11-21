@@ -21,7 +21,7 @@ alias l='clear && ls'
 alias dotfiles='cd ~/Dropbox/dotfiles'
 
 # emacs
-alias econf='e ~/.emacs.d/init.el'
+alias econf='emacs ~/.emacs.d/init.el'
 alias e='emacsclient -t -a ""'
 alias killemacs='emacsclient --eval "(progn (save-some-buffers t t) (kill-emacs))"'
 
