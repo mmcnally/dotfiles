@@ -41,6 +41,8 @@
   )
 
 
+;; need virtualenv python package, install with: pip install virtualenv
+;; need to run M-x jedi:install-server first time
 (use-package jedi
   :ensure t
   )
