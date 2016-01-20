@@ -4,7 +4,7 @@ export ZSH=/Users/Matt/.oh-my-zsh
 # Set name of the theme to load.
 ZSH_THEME="robbyrussell"
 
-plugins=(chucknorris brew)
+plugins=()
 
 ################################################
 ## ALIASES
@@ -26,11 +26,12 @@ alias e='emacsclient -t -a ""'
 alias killemacs='emacsclient --eval "(progn (save-some-buffers t t) (kill-emacs))"'
 
 # classes
-alias 585="cd ~/Dropbox/585"
-alias 377="cd ~/Dropbox/377"
-alias 383="cd ~/Dropbox/383"
-alias gamedev="cd ~/Dropbox/397"
-alias 150="cd ~/Dropbox/150"
+alias 305="cd ~/Dropbox/Spring\ 2016/305"
+alias 348="cd ~/Dropbox/Spring\ 2016/348"
+alias 445="cd ~/Dropbox/Spring\ 2016/445"
+alias 446="cd ~/Dropbox/Spring\ 2016/446"
+alias 589="cd ~/Dropbox/Spring\ 2016/589"
+alias 631="cd ~/Dropbox/Spring\ 2016/631"
 
 # tmux
 alias tm="tmux attach || tmux new"
@@ -39,6 +40,9 @@ alias tka="killall tmux"
 alias tls="tmux ls"
 alias ta="tmux attach"
 alias td="tmux detach"
+
+# brew
+alias bubu='brew update && brew outdated && brew upgrade && brew cleanup'
 
 # git
 alias gs="git status"
@@ -54,10 +58,9 @@ dots() {
     # copy current versions into dotfiles directory
     echo "copying..."
     echo ""
-    cp ~/.zshrc ~/Dropbox/dotfiles/zshrc
-    cp ~/.tmux.conf ~/Dropbox/dotfiles/tmux.conf
-    cp ~/.emacs.d/init.el ~/Dropbox/dotfiles/init.el
-
+    cp ~/.zshrc ~/Dropbox/dotfiles/zsh/zshrc
+    cp ~/.tmux.conf ~/Dropbox/dotfiles/tmux/tmux.conf
+    cp ~/.emacs.d/init.el ~/Dropbox/dotfiles/emacs/init.el
     cd ~/Dropbox/dotfiles
     git status
     cd -
@@ -79,3 +82,6 @@ export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 export EDITOR='emacs'
+
+# OPAM configuration
+. /Users/matt/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

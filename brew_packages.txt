@@ -1,8 +1,0 @@
-emacs
-fortune
-git
-libevent
-openssl
-reattach-to-user-namespace
-tmux
-wget
