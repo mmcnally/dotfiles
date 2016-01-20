@@ -58,9 +58,16 @@ dots() {
     # copy current versions into dotfiles directory
     echo "copying..."
     echo ""
+    # zsh config
     cp ~/.zshrc ~/Dropbox/dotfiles/zsh/zshrc
+    # tmux config
     cp ~/.tmux.conf ~/Dropbox/dotfiles/tmux/tmux.conf
+    # emacs config
     cp ~/.emacs.d/init.el ~/Dropbox/dotfiles/emacs/init.el
+    # brew package list
+    brew ls > ~/Dropbox/dotfiles/brew/brew_packages.txt
+
+    # see if anything changed
     cd ~/Dropbox/dotfiles
     git status
     cd -

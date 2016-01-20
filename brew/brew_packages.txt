@@ -1,7 +1,13 @@
+aspcud
+camlp4
+clasp
 emacs
 fortune
 git
+gringo
 libevent
+ocaml
+opam
 openssl
 reattach-to-user-namespace
 tmux
