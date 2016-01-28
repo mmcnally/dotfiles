@@ -51,6 +51,9 @@
   )
 
 
+(use-package utop
+  :ensure t
+  )
 
 (use-package merlin
   :mode ("\\.ml\\'" . merlin-mode)
@@ -102,7 +105,7 @@
 
 ;; indent buffer when not in python mode
 (defun indent-buffer-when-not-python ()
-  (when (not (derived-mode-p 'python-mode))
+  (when (not (or (derived-mode-p 'python-mode) (derived-mode-p 'tuareg-mode)))
     (indent-buffer)))
 
 ;; indent buffer on save
