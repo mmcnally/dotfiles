@@ -25,9 +25,6 @@
 ;;; Package Setup ;;;
 ;;;;;;;;;;;;;;;;;;;;;
 
-
-
-
 (use-package smartparens
   :defer 2
   :disabled t
@@ -56,6 +53,11 @@
   :ensure t
   )
 
+;; fixes terrible indenting of tuareg-mode
+(use-package ocp-indent
+  :ensure t
+  )
+
 ;; ocaml completion and other sweet stuff
 (use-package merlin
   :mode ("\\.ml\\'" . merlin-mode)
@@ -74,6 +76,8 @@
 (use-package tuareg
   :mode ("\\.ml\\'" . tuareg-mode)
   :ensure t
+  :config
+  (setq electric-indent-mode nil)
   )
 
 (use-package scala-mode2
@@ -81,14 +85,12 @@
   :ensure t
   )
 
-
 (use-package elm-mode
   :mode ("\\.elm\\'" . elm-mode)
   :ensure t
   )
 
-
-;; LaTeX mode
+;; LaTex
 (use-package auctex
   :mode ("\\.tex\\'" . LaTeX-mode)
   :init
@@ -107,20 +109,44 @@
 ;;; Other Configuration ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+
+;;;; Indent on save config ;;;;;;;;;;;;;
+
+;; formatting hooks on save
+(add-hook 'before-save-hook #'indent-buffer-when-not-python)
+(add-hook 'write-contents-functions #'delete-trailing-whitespace)
+
+;; shortcuts to enable/disable indenting on save
+(define-key global-map (kbd "M-s s") 'enable-indent-on-save)
+(define-key global-map (kbd "M-s M-s") 'disable-indent-on-save)
+
 ;; indent buffer when not in python mode
 (defun indent-buffer-when-not-python ()
-  (when (not (or (derived-mode-p 'python-mode) (derived-mode-p 'tuareg-mode)))
+  (when (not (derived-mode-p 'python-mode))
     (indent-buffer)))
 
-;; indent buffer on save
+;; indent buffer
 (defun indent-buffer ()
   (interactive)
   (save-excursion
     (indent-region (point-min) (point-max) nil)))
 
-;; formatting hooks on save
-(add-hook 'before-save-hook #'indent-buffer-when-not-python)
-(add-hook 'before-save-hook #'delete-trailing-whitespace)
+(defun enable-indent-on-save ()
+  (interactive)
+  (add-hook 'before-save-hook 'indent-buffer-when-not-python)
+  (message "indent-on-save enabled")
+  )
+
+(defun disable-indent-on-save ()
+  (interactive)
+  (remove-hook 'before-save-hook 'indent-buffer-when-not-python)
+  (message "indent-on-save disabled")
+  )
+
+
+
+
+
 
 ;; return indents automatically
 (define-key global-map (kbd "RET") 'newline-and-indent)
