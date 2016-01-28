@@ -51,10 +51,12 @@
   )
 
 
+;; ocaml repl
 (use-package utop
   :ensure t
   )
 
+;; ocaml completion and other sweet stuff
 (use-package merlin
   :mode ("\\.ml\\'" . merlin-mode)
   :ensure t
@@ -65,8 +67,10 @@
   :config
   (setq merlin-ac-setup t)
   (setq merlin-command 'opam)
+  (setq merlin-error-after-save nil)
   )
 
+;; ocaml mode
 (use-package tuareg
   :mode ("\\.ml\\'" . tuareg-mode)
   :ensure t
@@ -84,7 +88,7 @@
   )
 
 
-
+;; LaTeX mode
 (use-package auctex
   :mode ("\\.tex\\'" . LaTeX-mode)
   :init
