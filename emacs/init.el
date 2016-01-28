@@ -25,6 +25,9 @@
 ;;; Package Setup ;;;
 ;;;;;;;;;;;;;;;;;;;;;
 
+
+
+
 (use-package smartparens
   :defer 2
   :disabled t
@@ -34,7 +37,7 @@
   )
 
 (use-package auto-complete
-  :defer 2
+  ;; :defer 2
   :ensure t
   :config
   (ac-config-default)
@@ -48,15 +51,36 @@
   )
 
 
+
+(use-package merlin
+  :mode ("\\.ml\\'" . merlin-mode)
+  :ensure t
+  :init
+  (setq opam-share (substring (shell-command-to-string "opam config var share 2> /dev/null") 0 -1))
+  (add-to-list 'load-path (concat opam-share "/emacs/site-lisp"))
+  (add-hook 'tuareg-mode-hook 'merlin-mode)
+  :config
+  (setq merlin-ac-setup t)
+  (setq merlin-command 'opam)
+  )
+
+(use-package tuareg
+  :mode ("\\.ml\\'" . tuareg-mode)
+  :ensure t
+  )
+
 (use-package scala-mode2
   :mode ("\\.scala\\'" . scala-mode)
   :ensure t
   )
 
+
 (use-package elm-mode
   :mode ("\\.elm\\'" . elm-mode)
   :ensure t
   )
+
+
 
 (use-package auctex
   :mode ("\\.tex\\'" . LaTeX-mode)
