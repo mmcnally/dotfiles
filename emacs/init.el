@@ -43,9 +43,10 @@
 
 ;; need virtualenv python package, install with: pip install virtualenv
 ;; need to run M-x jedi:install-server first time
-(use-package jedi
-  :ensure t
-  )
+;; (use-package jedi
+;;   :ensure t
+;;   :disabled t
+;;   )
 
 
 ;; ocaml repl
@@ -190,8 +191,8 @@
 (setq js-indent-level 2)
 
 ;; python autocomplete - jedi
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)
+;; (add-hook 'python-mode-hook 'jedi:setup)
+;; (setq jedi:complete-on-dot t)
 
 ;; uncomment or comment line/region
 (defun comment-or-uncomment-region-or-line ()
