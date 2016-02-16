@@ -20,14 +20,11 @@ alias edlab='ssh -X -l mgmcnally elnux.cs.umass.edu'
 alias l='clear && ls'
 alias dotfiles='cd ~/Dropbox/dotfiles'
 
-alias printedlab=print-edlab()
-
-
 # moves file (given as arg) to edlab machine,
 # sets default printer to ugprt
 # prints file given as arg, then deletes it from edlab machine
 # TODO -- currently doesn't work with filenames that have spaces
-print-edlab() {
+printedlab() {
     echo "starting..."
     echo "moving file to edlab..."
     scp $1 mgmcnally@elnux.cs.umass.edu:~/
