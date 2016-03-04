@@ -1,8 +1,11 @@
 aspcud
+autoconf
+automake
 battery
 camlp4
 clasp
 emacs
+emacs-mac
 fortune
 gdbm
 git
@@ -12,6 +15,7 @@ node
 ocaml
 opam
 openssl
+pkg-config
 python
 python3
 readline
