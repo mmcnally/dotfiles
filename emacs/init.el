@@ -6,7 +6,7 @@
 (setq package-enable-at-startup nil)
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (add-to-list 'package-archives
-	     '("melpa" . "http://melpa.org/packages/"))
+             '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
 
 (when (not package-archive-contents)
@@ -96,13 +96,13 @@
   :mode ("\\.tex\\'" . LaTeX-mode)
   :init
   (setq TeX-command-list
-	'(
-	  ("LaTeX" "%`%l%(mode)%' %t" TeX-run-TeX nil (latex-mode doctex-mode)
-	   :help "Run LaTeX")
-	  ("View" "open -a Preview.app %s.pdf" TeX-run-command t t
-	   :help "Run Text viewer")
-	  )
-	)
+        '(
+          ("LaTeX" "%`%l%(mode)%' %t" TeX-run-TeX nil (latex-mode doctex-mode)
+           :help "Run LaTeX")
+          ("View" "open -a Preview.app %s.pdf" TeX-run-command t t
+           :help "Run Text viewer")
+          )
+        )
   :ensure t
   )
 
@@ -156,6 +156,9 @@
 (show-paren-mode t)
 (setq show-paren-delay 0)
 
+;; show column number
+(setq column-number-mode t)
+
 ;; move backups to temp dir
 ;; can still recover file with M-x recover-file
 (setq backup-directory-alist
@@ -184,6 +187,18 @@
 ;; uses y or n instead of yes or no
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;; python indenting
+
+
+;; (setq-default indent-tabs-mode nil)
+;; (setq-default tab-width 2)
+(add-hook 'python-mode-hook
+          (function (lambda ()
+                      (setq indent-tabs-mode nil)
+                      (setq tab-width 4)
+                      (setq python-indent 4)
+                      )))
+
 ;; java indenting
 (setq c-basic-offset 2)
 
@@ -200,7 +215,7 @@
   (interactive)
   (let (beg end)
     (if (region-active-p)
-	(setq beg (region-beginning) end (region-end))
+        (setq beg (region-beginning) end (region-end))
       (setq beg (line-beginning-position) end (line-end-position)))
     (comment-or-uncomment-region beg end)))
 
