@@ -25,3 +25,4 @@ sqlite
 tmux
 wget
 xz
+z3
