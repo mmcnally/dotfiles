@@ -40,7 +40,6 @@
   (ac-config-default)
   )
 
-
 ;; need virtualenv python package, install with: pip install virtualenv
 ;; need to run M-x jedi:install-server first time
 ;; (use-package jedi
@@ -227,6 +226,17 @@
 (add-hook 'LaTeX-mode-hook '(lambda () (local-set-key (kbd "C-j") 'comment-or-uncomment-region-or-line)))
 
 ;; set transparency
-(set-frame-parameter (selected-frame) 'alpha '(75 75))
-(add-to-list 'default-frame-alist '(alpha 75 75))
-(set-face-attribute 'default nil :background "black" :foreground "white")
+(if window-system
+    (progn
+      (toggle-scroll-bar -1)
+      (tool-bar-mode -1)
+      )
+  (progn
+    (set-face-attribute 'default nil :background "black" :foreground "white")
+    (set-frame-parameter (selected-frame) 'alpha '(75 75))
+    (add-to-list 'default-frame-alist '(alpha 75 75))))
+
+
+
+
+
