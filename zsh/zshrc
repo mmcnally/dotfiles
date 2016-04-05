@@ -36,17 +36,13 @@ printedlab() {
 
 # prints file in lederle 223
 printlederle() {
-    printedlab $1 elprt1
+    printedlab $1 elprt1_single
 }
 
 # prints in cs building uspace
 printcs() {
-    printedlab $1 ugprt
+    printedlab $1 ugprt_single
 }
-
-
-
-
 
 
 # emacs
@@ -58,8 +54,6 @@ alias killemacs='emacsclient --eval "(progn (save-some-buffers t t) (kill-emacs)
 alias 305="cd ~/Dropbox/Spring\ 2016/305"
 alias 348="cd ~/Dropbox/Spring\ 2016/348"
 alias 445="cd ~/Dropbox/Spring\ 2016/445"
-alias 446="cd ~/Dropbox/Spring\ 2016/446"
-alias 589="cd ~/Dropbox/Spring\ 2016/589"
 alias 631="cd ~/Dropbox/Spring\ 2016/631"
 
 # tmux
