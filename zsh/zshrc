@@ -121,3 +121,8 @@ export EDITOR='emacs'
 
 # OPAM configuration
 . /Users/matt/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+
+# make font smoothing less bold in terminal, run this once on new computers
+# defaults write -g AppleFontSmoothing -int 1
+# sudo defaults write -g AppleFontSmoothing -int 1
