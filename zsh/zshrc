@@ -14,36 +14,125 @@ plugins=()
 
 # general
 alias zshconf="emacs ~/.zshrc && source ~/.zshrc"
+alias zshrc="zshconf"
 alias drp="cd ~/Dropbox"
 alias startserver="sudo python -m SimpleHTTPServer 80"
 alias edlab='ssh -X -l mgmcnally elnux.cs.umass.edu'
 alias l='clear && ls'
 alias dotfiles='cd ~/Dropbox/dotfiles'
+alias jn='jupyter notebook'
 
 # first arg filename
 # second arg printer name
 # moves file to edlab machine, sets default printer to printer given
 # prints file given as arg, then deletes it from edlab machine
 # TODO -- currently doesn't work with filenames that have spaces
+# -
 printedlab() {
-    echo "starting..."
-    echo "moving file to edlab..."
-    scp $1 mgmcnally@elnux.cs.umass.edu:~/
-    echo "printing to \"$2\" and then deleting file"
-    ssh -X -l mgmcnally elnux.cs.umass.edu "lpoptions -d \"$2\"; lp \"$1\"; rm \"$1\";"
-    echo "file printed and then deleted"
+    # unset username &> /dev/null
+    # unset filename &> /dev/null
+    local copies=1
+
+    # Parse params
+    for i in "$@"
+    do
+	case $i in
+	    -u=*|--username=*)
+		local username="${i#*=}"
+		shift # past argument=value
+		;;
+	    -f=*|--filename=*)
+		local filename="${i#*=}"
+		shift # past argument=value
+		;;
+	    -p=*|--printer=*)
+		local printer="${i#*=}"
+		shift # past argument=value
+		;;
+	    -c=*|--copies=*)
+		copies="${i#*=}"
+		shift # past argument=value
+		;;
+	    --default)
+		default=YES
+		shift # past argument with no value
+		;;
+	    *)
+		# unknown option
+		# echo "bad"
+		# return 1
+		;;
+	esac
+    done
+    # echo $username
+    # echo $filename
+    # echo $printer
+
+    local num_tries=3
+    local tries=$num_tries
+    # Check if edlab can be accessed w/o passwork (aka public key authorized)
+    # Try to set up num_tries times
+    while (( $tries > 0 )) && ! ssh -o PasswordAuthentication=no mgmcnally@elnux.cs.umass.edu exit &>/dev/null ; do
+	
+	# need to set up public key
+	if ((tries == 2)) ; then
+	    echo "Need to set up public key login in with no password"
+	    echo "setting up public key transfer..."
+	fi
+	echo ""
+	echo "please enter password below to set up public key on edlab machines"
+	tries=$((tries - 1))
+	ssh-copy-id mgmcnally@elnux.cs.umass.edu &> /dev/null
+    done
+
+    # Failed to set up public key
+    if ((tries <= 0)) ; then
+	echo "Public key setup failed :/"
+	return 1
+    fi
+
+    # Successfully set up public key
+    if ((tries < ${num_tries})) ; then
+	echo "Public key setup finished!"
+    fi
+
+    # Ready to move file and print
+    if ! scp ${filename} ${username}@elnux.cs.umass.edu:~/ ; then
+	echo "ERROR: File transfer failed" 1>&2
+	return 1
+    fi
+
+    echo "printing to \"${printer}\" and then deleting file"
+    if ! ssh -l ${username} elnux.cs.umass.edu "lpoptions -d \"${printer}\" > /dev/null;" ; then
+	ssh -l ${username} elnux.cs.umass.edu "rm \"${filename}\";" > /dev/null
+	echo "ERROR: failed to set printer"
+	return 1
+    fi
+    
+    if ! ssh -l ${username} elnux.cs.umass.edu "lp -q 1 -s -n ${copies} \"${filename}\";" ; then
+	ssh -l ${username} elnux.cs.umass.edu "rm \"${filename}\";" > /dev/null
+	echo "ERROR: failed to print"
+	return 1;
+    fi
+
+    # not critical if this fails
+    ssh -l ${username} elnux.cs.umass.edu "rm \"${filename}\";" > /dev/null
 }
 
 # prints file in lederle 223
 printlederle() {
-    printedlab $1 elprt1_single
+    # printedlab $1 elprt1_single
 }
 
 # prints in cs building uspace
 printcs() {
-    printedlab $1 ugprt_single
+    printedlab --username=mgmcnally $1 --printer=ugprt_single
 }
 
+# prints in cs building uspace
+printcs_double() {
+    printedlab $1 ugprt
+}
 
 # emacs
 alias econf='emacs ~/.emacs.d/init.el'
@@ -51,10 +140,10 @@ alias e='emacsclient -t -a ""'
 alias killemacs='emacsclient --eval "(progn (save-some-buffers t t) (kill-emacs))"'
 
 # classes
-alias 305="cd ~/Dropbox/Spring\ 2016/305"
-alias 348="cd ~/Dropbox/Spring\ 2016/348"
-alias 445="cd ~/Dropbox/Spring\ 2016/445"
-alias 631="cd ~/Dropbox/Spring\ 2016/631"
+alias 589="cd ~/Dropbox/Machine\ Learning"
+alias ml="cd ~/Dropbox/Machine\ Learning"
+alias systems="cd ~/Dropbox/Systems"
+alias 630="cd ~/Dropbox/Systems"
 
 # tmux
 alias tm="tmux attach || tmux new"
@@ -103,7 +192,7 @@ dots() {
 }
 
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/Matt/Documents/scala-2.11.2/bin:/usr/texbin:/Library/Tex/texbin"
+export PATH="/Users/matt/anaconda2/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/Matt/Documents/scala-2.11.2/bin:/usr/texbin:/Library/Tex/texbin"
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
