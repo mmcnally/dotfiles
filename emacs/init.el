@@ -4,10 +4,13 @@
 
 (require 'package)
 (setq package-enable-at-startup nil)
+
+(package-initialize)
+
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/"))
-(package-initialize)
+
 
 (when (not package-archive-contents)
   (package-refresh-contents))
@@ -27,10 +30,12 @@
 
 (use-package smartparens
   :defer 2
-  :disabled t
+  ;; :disabled t
   :ensure t
   :config
+  (show-smartparens-global-mode +1)
   (smartparens-global-mode t)
+  (setq sp-highlight-pair-overlay nil)
   )
 
 (use-package auto-complete
@@ -42,10 +47,10 @@
 
 ;; need virtualenv python package, install with: pip install virtualenv
 ;; need to run M-x jedi:install-server first time
-;; (use-package jedi
-;;   :ensure t
-;;   :disabled t
-;;   )
+(use-package jedi
+  :ensure t
+  ;; :disabled t
+  )
 
 
 ;; ocaml repl
@@ -205,8 +210,8 @@
 (setq js-indent-level 2)
 
 ;; python autocomplete - jedi
-;; (add-hook 'python-mode-hook 'jedi:setup)
-;; (setq jedi:complete-on-dot t)
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
 
 ;; uncomment or comment line/region
 (defun comment-or-uncomment-region-or-line ()
@@ -238,5 +243,19 @@
 
 
 
-
-
+;; TODO -- make this a switch
+(setq mode-require-final-newline nil)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (exec-path-from-shell anaconda-mode utop use-package tuareg scala-mode2 ocp-indent merlin jedi emacs-eclim elm-mode auctex))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
